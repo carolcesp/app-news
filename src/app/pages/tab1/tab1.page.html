@@ -8,29 +8,6 @@
 
 <ion-content color="dark">
 
-  <ion-grid fixed>
-    <ion-row>
-      <ion-col *ngFor="let item of noticias; let i = index">
-
-        <ion-card color="dark" size="12" size-lg="3" size-md="4" size-sm="2" size-xs="12">
-            <ion-card-header>
-              <ion-card-subtitle>
-                <span class="text-primary">{{ i + 1 }}. </span>
-                <span class="noticias-source-name">{{item.source.name}} </span>
-              </ion-card-subtitle>
-              <ion-card-title> {{item.title}} </ion-card-title>
-            </ion-card-header>
-
-            <!-- Se diferencia del img normal, que este se carga conforme vay siendo necesario o
-            cuando vayan entrando al view los elementos -->
-            <ion-img *ngIf="item.urlToImage" [src]="item.urlToImage"></ion-img>
-
-            <ion-card-content> {{item.description}} </ion-card-content>
-        </ion-card>
-
-
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <app-listado-noticias [noticias]="noticias"></app-listado-noticias>
 
 </ion-content>
