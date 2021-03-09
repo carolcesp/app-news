@@ -26,17 +26,22 @@ export class Tab2Page implements OnInit {
   }
 
   changeCategory(event) {
-    console.log('change');
-
     this.noticias = [];
     this.getNews(event.detail.value);
   }
 
-  getNews(categoria:string) {
+  loadData(event) {
+    this.getNews(this.segment.value, event);
+  }
+
+  getNews(categoria:string, event?) {
     this.noticiaService.getTopHeadlinesCategory(categoria).subscribe(resp => {
       this.noticias.push(...resp.articles);
-    })
 
+      if (event) {
+        event.target.complete();
+      }
+    });
   }
 
 }

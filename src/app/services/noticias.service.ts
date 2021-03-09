@@ -15,6 +15,10 @@ const headers = new HttpHeaders({
 })
 export class NoticiasService {
 
+  headlinesPage = 0;
+  categoryPage = 0;
+  currentCategory = '';
+
   constructor(private http: HttpClient) { }
 
   // <T> esto quiere decir, que aqui voy a recibir un tipo y la respuesta va a ser de ese tipo
@@ -26,12 +30,21 @@ export class NoticiasService {
   }
 
   getTopHeadlines() {
+    this.headlinesPage++;
 
-    return this.getQuery<ResponseTopHeadlines>(`/top-headlines?country=us`)
+    return this.getQuery<ResponseTopHeadlines>(`/top-headlines?country=us&page=${this.headlinesPage}`)
     // return this.http.get<ResponseTopHeadlines>(`http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=268593c3bd35491da12fc3b003062068`)
   }
 
   getTopHeadlinesCategory( categoria: string) {
-    return this.getQuery<ResponseTopHeadlines>(`/top-headlines?country=us&category=${categoria}`)
+
+    if (this.currentCategory === categoria) {
+      this.categoryPage++;
+
+    } else {
+      this.categoryPage = 1;
+      this.currentCategory = categoria;
+    }
+    return this.getQuery<ResponseTopHeadlines>(`/top-headlines?country=us&category=${categoria}&page=${this.categoryPage}`)
   }
 }
