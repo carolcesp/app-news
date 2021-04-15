@@ -3,13 +3,20 @@
     <ion-card-subtitle>
       <span class="text-primary">{{ indice + 1 }}. </span>
       <span class="noticias-source-name">{{noticia.source.name}} </span>
+
+      <div class="more-news">
+        <ion-button></ion-button>
+
+      </div>
+
+
     </ion-card-subtitle>
-    <ion-card-title> {{noticia.title}} </ion-card-title>
+    <ion-card-title (click)="openNews()"> {{noticia.title}} </ion-card-title>
   </ion-card-header>
 
-  <!-- Se diferencia del img normal, que este se carga conforme vay siendo necesario o
+  <!-- Se diferencia del img normal, que este se carga conforme va siendo necesario o
   cuando vayan entrando al view los elementos -->
-  <ion-img *ngIf="noticia.urlToImage" [src]="noticia.urlToImage"></ion-img>
+  <ion-img *ngIf="noticia.urlToImage" [src]="noticia.urlToImage" (click)="openNews()"></ion-img>
 
   <ion-card-content> {{noticia.description}} </ion-card-content>
 </ion-card>
